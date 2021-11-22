@@ -10,7 +10,7 @@ global with sharing class WebhookDemo {
             //String repo;
             if(parser.nextToken() != null){
                 if(parser.getText() == 'commits'){
-                    parser.nextToken();
+                   // parser.nextToken();
                     committ = (Committ)parser.readValueAs(Committ.class);
                 }
               /*   if(parser.getText() == 'full_name'){
