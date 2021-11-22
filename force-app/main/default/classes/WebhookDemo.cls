@@ -9,6 +9,7 @@ global with sharing class WebhookDemo {
             String repo;
             if(parser.nextToken() != null){
                 if(parser.getText() == 'full_name'){
+                    parser.nextToken();
                     repo = parser.getText();
                 }
             }
