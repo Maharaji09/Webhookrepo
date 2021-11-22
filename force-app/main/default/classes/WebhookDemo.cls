@@ -6,6 +6,7 @@ global with sharing class WebhookDemo {
             RestResponse response = RestContext.response; 
             response.statusCode = 200;
             response.responseBody = Blob.valueOf('Success');
-            System.debug(response);
+
+            JSONparser parser = JSON.createParser(request.requestBody.toString());
     }
 }
