@@ -6,27 +6,44 @@ global with sharing class WebhookDemo {
             RestResponse response = RestContext.response; 
 
             JSONparser parser = JSON.createParser(request.requestBody.toString());
-            Committ committ;
+            pusher ps;
+           // Committ committ;
             //String repo;
             if(parser.nextToken() != null){
-                if(parser.getText() == 'commits'){
+                if(parser.getText() == 'pusher'){
+                    parser.nextToken();
+                    ps = (pusher)parser.readValueAs(pusher.class);
+                }
+             /*   if(parser.getText() == 'commits'){
                    // parser.nextToken();
                     committ = (Committ)parser.readValueAs(Committ.class);
                 }
-              /*   if(parser.getText() == 'full_name'){
+                 if(parser.getText() == 'full_name'){
                     repo = parser.getText();
                 }    */
             }
             GitPushEvent__c gitRecord = new GitPushEvent__c();
            // gitRecord.Name = 'gitRecord';
            // gitRecord.Repository_Name__c = repo;
-            gitRecord.Committer_Name__c = committ.name;
-            gitRecord.Committer_Email__c = committ.email;
+          //  gitRecord.Committer_Name__c = committ.name;
+           // gitRecord.Committer_Email__c = committ.email;
+           gitRecord.Committer_Name__c = ps.name;
+           gitRecord.Committer_Email__c = ps.email;
             insert gitRecord;
 
             response.statusCode = 200;
             response.responseBody = Blob.valueOf('Success');
         } 
+
+        public class pusher{
+            public String name;
+            public String email;
+            public pusher(String name, String email){
+                name = name;
+                email = email;
+            }
+        }
+
     public class Committ{
         public String name;
         public String email;
