@@ -2,49 +2,20 @@
 global with sharing class WebhookDemo {
     @HttpPost
     global static void handleChanges(){
-            RestRequest request = RestContext.request;
-            RestResponse response = RestContext.response; 
+        RestRequest request = RestContext.request;
+        RestResponse response = RestContext.response; 
+        Map<String,Object> mapResponse = (Map<String,Object>)JSON.deserializeUntyped(request.requestBody.toString());
+        List<Object> commitObj = (List<Object>)mapResponse.get('commits');
+        Map<String,Object> commitMap = (Map<String,Object>)commitObj[0];
+        Map<String,Object> committerDetails = (Map<String,Object>)commitMap.get('committer');
 
-            JSONparser parser = JSON.createParser(request.requestBody.toString());
-            Committ com;
-            //String repo;
-            if(parser.nextToken() != null){
-                if(parser.getText() == 'commits'){
-                    //parser.nextToken();
-                    com = (Committ)parser.readValueAs(Committ.class);
-                }
-              /*   if(parser.getText() == 'full_name'){
-                    repo = parser.getText();
-                }    */
-            }
-            GitPushEvent__c gitRecord = new GitPushEvent__c();
-           // gitRecord.Name = 'gitRecord';
-           // gitRecord.Repository_Name__c = repo;
-            gitRecord.Committer_Name__c = com.name;
-            gitRecord.Committer_Email__c = com.email;
-            insert gitRecord;
+        GitPushEvent__c gitRecord = new GitPushEvent__c();
+        gitRecord.Committer_Name__c = committerDetails.get('name').toString();
+        gitRecord.Committer_Email__c = committerDetails.get('email').toString();
+        gitRecord.Commit_Message__c = commitMap.get('message').toString();
+        insert gitRecord;
 
-            response.statusCode = 200;
-            response.responseBody = Blob.valueOf('Success');
-        } 
-    public class Committ{
-        public String name;
-        public String email;
-        public String url;
-        public String commitMessage;
-        public String addedComp;
-        public String removedComp;
-        public String modifiedComp;
-
-        public Committ(String name, String email, String url, String commitMessage, String addedComp, String removedComp, String modifiedComp){
-            name = name;
-            email = email;
-            this.url = url;
-            this.commitMessage = commitMessage;
-            this.addedComp = addedComp;
-            this.removedComp = removedComp;
-            this.modifiedComp = modifiedComp;
-        }
+        response.statusCode = 200;
+        response.responseBody = Blob.valueOf('Success');
     }
-
 }
