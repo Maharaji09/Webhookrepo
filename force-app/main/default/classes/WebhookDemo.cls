@@ -4,6 +4,6 @@ global with sharing class WebhookDemo {
     global static void handleChanges(){
             RestRequest request = RestContext.request;
             RestResponse response = RestContext.response; 
-            response.responseBody = Blob.valueOf('String');
+            response.responseBody = Blob.valueOf('Sucess');
     }
 }
