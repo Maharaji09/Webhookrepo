@@ -22,7 +22,7 @@ global with sharing class WebhookDemo {
         gitRecord.Committed_URL__c = commitMap.get('url').toString();
         gitRecord.Committed_Timestamp__c = dateTim;
         gitRecord.Repository_Name__c = repoMap.get('name').toString();
-        gitRecord.Modified_Components__c = modifiedObj[0].toString();
+        gitRecord.Modified_Components__c = modifiedObj!=null?modifiedObj[0].toString():'';
         gitRecord.Committed_ID__c = commitMap.get('id').toString();
         insert gitRecord;
         //commit rule upp
