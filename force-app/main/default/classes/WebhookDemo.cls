@@ -14,7 +14,7 @@ global with sharing class WebhookDemo {
                 }
             }
             GitPushEvent__c gitRecord = new GitPushEvent__c();
-            gitRecord.Name = 'gitRecord';
+           // gitRecord.Name = 'gitRecord';
             gitRecord.Repository_Name__c = repo;
             insert gitRecord;
 
