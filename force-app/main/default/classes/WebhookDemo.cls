@@ -10,7 +10,7 @@ global with sharing class WebhookDemo {
             //String repo;
             if(parser.nextToken() != null){
                 if(parser.getText() == 'commits'){
-                    parser.nextToken();
+                    //parser.nextToken();
                     com = (Committ)parser.readValueAs(Committ.class);
                 }
               /*   if(parser.getText() == 'full_name'){
@@ -37,8 +37,8 @@ global with sharing class WebhookDemo {
         public String modifiedComp;
 
         public Committ(String name, String email, String url, String commitMessage, String addedComp, String removedComp, String modifiedComp){
-            this.name = name;
-            this.email = email;
+            name = name;
+            email = email;
             this.url = url;
             this.commitMessage = commitMessage;
             this.addedComp = addedComp;
