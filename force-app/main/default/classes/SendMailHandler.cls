@@ -2,7 +2,7 @@ public class SendMailHandler {
     public static void sendMail(List<GitPushEvent__c> pushEventsList){
         
         Contact con = [Select Id from Contact where Name='Hari Rubesh'];
-        pushEventsList[0].Contact__c = con.Id;
+        //pushEventsList[0].Contact__c = con.Id;
         
         String pushId = pushEventsList[0].Id;
         //String contactId = pushEventsList[0].Contact__c;
