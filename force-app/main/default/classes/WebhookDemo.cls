@@ -20,7 +20,7 @@ global with sharing class WebhookDemo {
         con.Email = 'maharaji1999@gmail.com';
         insert con; */
 
-        Contact con = [Select Id from Contact where Name = 'Hari Rubesh'];
+        Contact con = [Select Id from Contact where name='Hari Rubesh'];
 
         GitPushEvent__c gitRecord = new GitPushEvent__c();
         gitRecord.Committer_Name__c = committerDetails.get('name').toString();
