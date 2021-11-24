@@ -15,10 +15,10 @@ global with sharing class WebhookDemo {
         String dat = commitMap.get('timestamp').toString();
         DateTime dateTim = (DateTime)Json.deserialize('"'+dat+'"', DateTime.class); 
         
-        Contact con = new Contact();
+        /* Contact con = new Contact();
         con.LastName = 'Yami Vishu';
         con.Email = 'maharaji1999@gmail.com';
-        insert con;  
+        insert con;  */ 
 
         //Contact con = [Select Id from Contact where name='Hari Rubesh'];
 
@@ -31,7 +31,7 @@ global with sharing class WebhookDemo {
         gitRecord.Repository_Name__c = repoMap.get('name').toString();
         gitRecord.Modified_Components__c = modifiedObj!=null?modifiedObj[0].toString():'';
         gitRecord.Committed_ID__c = commitMap.get('id').toString();
-        gitRecord.Contact__c = con.Id;
+        //gitRecord.Contact__c = con.Id;
         insert gitRecord;
         //commit
 
