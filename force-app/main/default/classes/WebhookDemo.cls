@@ -15,12 +15,12 @@ global with sharing class WebhookDemo {
         String dat = commitMap.get('timestamp').toString();
         DateTime dateTim = (DateTime)Json.deserialize('"'+dat+'"', DateTime.class); 
         
-        /*Contact con = new Contact();
-        con.Name = 'Yami Vishu';
+        Contact con = new Contact();
+        con.LastName = 'Yami Vishu';
         con.Email = 'maharaji1999@gmail.com';
-        insert con; */
+        insert con; 
 
-        Contact con = [Select Id from Contact where name='Hari Rubesh'];
+        //Contact con = [Select Id from Contact where name='Hari Rubesh'];
 
         GitPushEvent__c gitRecord = new GitPushEvent__c();
         gitRecord.Committer_Name__c = committerDetails.get('name').toString();
