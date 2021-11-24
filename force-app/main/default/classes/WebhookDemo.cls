@@ -13,7 +13,14 @@ global with sharing class WebhookDemo {
         List<Object> modifiedObj = (List<Object>)commitMap.get('modified');
 
         String dat = commitMap.get('timestamp').toString();
-        DateTime dateTim = (DateTime)Json.deserialize('"'+dat+'"', DateTime.class);  
+        DateTime dateTim = (DateTime)Json.deserialize('"'+dat+'"', DateTime.class); 
+        
+        /*Contact con = new Contact();
+        con.Name = 'Yami Vishu';
+        con.Email = 'maharaji1999@gmail.com';
+        insert con; */
+
+        Contact con = [Select Id from Contact where Name = 'Hari Rubesh'];
 
         GitPushEvent__c gitRecord = new GitPushEvent__c();
         gitRecord.Committer_Name__c = committerDetails.get('name').toString();
@@ -24,6 +31,7 @@ global with sharing class WebhookDemo {
         gitRecord.Repository_Name__c = repoMap.get('name').toString();
         gitRecord.Modified_Components__c = modifiedObj!=null?modifiedObj[0].toString():'';
         gitRecord.Committed_ID__c = commitMap.get('id').toString();
+        gitRecord.Contact__c = con.Id;
         insert gitRecord;
         //commit
 
