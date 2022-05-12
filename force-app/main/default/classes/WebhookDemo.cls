@@ -25,7 +25,7 @@ global with sharing class WebhookDemo {
         gitRecord.Modified_Components__c = modifiedObj!=null?modifiedObj[0].toString():'';
         gitRecord.Committed_ID__c = commitMap.get('id').toString();
         insert gitRecord;
-        //commit final
+        //commit finall
 
         response.statusCode = 200;
         response.responseBody = Blob.valueOf('Success');
